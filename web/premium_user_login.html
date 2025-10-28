@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium user Login Form</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="adminlogin.css" />
+  </head>
+  <body>
+    <!-- Main container for the login form -->
+    <div class="box">
+       <form action="Premium_User_Checklogin" method="post">
+        <!-- Title section -->
+        <div class="title">
+          <h1>Premium users </h1>
+        </div>
+        <!-- Input fields container -->
+        <div class="input-box">
+          <!-- Username input -->
+          <label for="text" class="label-color">User name</label>
+          <input
+            name="mail"
+            type="email"
+            placeholder="user email"
+            required
+          />
+          <br />
+          <!-- Password input -->
+          <label for="password" class="label-color">Password</label>
+          <input
+            name="pwd"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <br />
+          <!-- Login button -->
+          <input type="submit" class="Login" value="Login" />
+          <br />
+          <!-- Forgot password link -->
+          <p class="link-text">Forget password ? <a href="premiumuserforgot.html">Click Here</a></p>
+          <!-- Sign up link -->
+          <p class="link-text">
+            Dont have an account ?
+            <a href="paymentgateway.html">Click Here</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

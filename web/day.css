@@ -1,0 +1,263 @@
+* Base styles *
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #e0f7fa, #e1f5fe);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Grid container */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 10px;
+  }
+  
+  /* Day card */
+  .day-box {
+    background-color: #ffffffcc;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .day-box:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Locked style */
+  .day-box.locked {
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: #f5f5f5;
+  }
+  
+  .day-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.1rem;
+  }
+  
+  /* Progress bar */
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .days-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    .day-label {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .days-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 14px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    .day-box {
+      padding: 12px;
+    }
+  
+    .day-label {
+      font-size: 0.95rem;
+    }
+  }
+  /* Top progress bar section */
+.main-progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .main-progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+  }
+  
+  .main-progress {
+    height: 100%;
+    width: 0%;
+    background-color: #2196f3;
+    transition: width 0.4s ease;
+    border-radius: 20px;
+  }
+  
+  #mainProgressText {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  
+/* new */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to right, #f8fdff, #e0f7fa);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  #totalCalories {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .exercise-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .exercise-card h3 {
+    margin-top: 10px;
+  }
+  
+  .checkbox {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #2196f3;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .checkbox.checked {
+    background-color: #4caf50;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    max-width: 900px;
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .modal-left, .modal-right {
+    flex: 1 1 300px;
+  }
+  
+  .modal-left iframe {
+    border-radius: 10px;
+  }
+  
+  #focusImage {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+  }
+  
+  .close-button:hover {
+    color: #000;
+  }
+  
+  @media (max-width: 768px) {
+    .modal-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .day-box.locked {
+    pointer-events: none;
+    opacity: 0.6;
+    filter: grayscale(80%);
+  }

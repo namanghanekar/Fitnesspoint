@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support Center</title>
+    <link rel="stylesheet" href="help_and_support.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Help and <span>Support</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#knowledge-base">Knowledge Base</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>How can we help you today?</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search for help...">
+                <button id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="quick-links">
+                <a href="#faq" class="quick-link">
+                    <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
+                    <span>FAQs</span>
+                </a>
+                <a href="#contact" class="quick-link">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <span>Contact Us</span>
+                </a>
+              
+                <a href="#" class="quick-link" id="chat-btn">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <span>Live Chat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="account">Account</button>
+                <button class="category-btn" data-category="billing">Billing</button>
+                <button class="category-btn" data-category="product">Product</button>
+                <button class="category-btn" data-category="technical">Technical</button>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>How do I create an account?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To create an account, click on the "Sign Up" button in the top right corner of our homepage. Fill in your details including your name, email address, and password. Once submitted, you'll receive a verification email. Click the link in the email to verify your account and you're all set!</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>How do I reset my password?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset your password, click on the "Login" button, then select "Forgot Password". Enter the email address associated with your account and we'll send you a password reset link. Click the link in the email and follow the instructions to create a new password.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express, Discover), PayPal, and bank transfers. For enterprise customers, we also offer invoicing options. Contact our sales team for more information on enterprise billing.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <h3>How do I cancel my subscription?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To cancel your subscription, log in to your account and go to "Account Settings" > "Subscription". Click on "Cancel Subscription" and follow the prompts. Your subscription will remain active until the end of your current billing period. We're sorry to see you go and welcome your feedback on how we could improve.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="product">
+                    <div class="faq-question">
+                        <h3>What features are included in the free plan?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our free plan includes basic features such as basic exercises .</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <h3>Is my data secure?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we take data security very seriously. All data is encrypted both in transit and at rest using industry-standard encryption protocols. We maintain regular security audits and are compliant with GDPR, CCPA, and other privacy regulations. For more details, please review our Security Policy.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <h3>Why aren't my workout progress and completed exercises syncing across devices?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This issue may occur if you're not logged into the same account on all devices or if there's a temporary internet connectivity problem. Please make sure.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-category="product">
+                    <div class="faq-question">
+                        <h3>Do you offer a mobile app?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, we currently do not offer mobile apps for iOS or Android devices. However, you can still access all features through our web version on any browser. We’re working on expanding to mobile soon.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-more">
+                <p>Can't find what you're looking for?</p>
+                <a href="#contact" class="btn">Contact Support</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Support</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Email Support</h3>
+                        <p>Get a response within 24 hours</p>
+                        <a href="mailto:support@example.com">nilayj30@gmail.com.com</a>
+                    </div>
+                    <div class="contact-method">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <h3>Phone Support</h3>
+                        <p>Available Mon-Fri, 9am-5pm EST</p>
+                        <a href="tel:+18001234567">9039517103</a>
+                    </div>
+                    <div class="contact-method">
+                        <div class="icon"><i class="fas fa-comments"></i></div>
+                        <h3>Live Chat</h3>
+                        <p>Chat with our support team</p>
+                        <button class="chat-link" id="chat-link-btn">Start Chat</button>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a message</h3>
+                    <!--<form id="support-form" action="help_and_support_submit_ticket" method="post">-->
+                       <form id="support-form" action="help_and_support_submit_ticket" method="post">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic</option>
+                                <option value="account">Account Issue</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="priority" name="priority">
+                                <span class="checkmark"></span>
+                                Mark as priority (Premium users only)
+                            </label>
+                        </div>
+                        <button type="submit" class="btn submit-btn">Submit Ticket</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <h3>Live Support</h3>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message support">
+                <div class="message-content">
+                    <p>Hello! How can I help you today?</p>
+                    <span class="time">Just now</span>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-field" placeholder="Type your message...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="success-message" id="success-message">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Thank You!</h3>
+            <p>Your support ticket has been submitted successfully. We'll get back to you shortly.</p>
+            <button id="close-success">Close</button>
+        </div>
+    </div>
+
+
+    <section class="footer">
+        <div class="section__container footer__container">
+          <div class="footer__col">
+            <a href="#" class="footer__logo">
+              <img src="images/logo-white.png" alt="logo" />
+            </a>
+            <ul class="footer__links">
+              <li>
+                <a href="#">
+                  <span><i class="ri-phone-line"></i></span> +91 9039517103
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span><i class="ri-map-pin-line"></i></span> Indore India
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span><i class="ri-mail-line"></i></span> Myfitness@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Quick Links</h4>
+            <ul class="footer__links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#class">Classes</a></li>
+              <li><a href="#service">Gallery</a></li>
+              <li><a href="#">Membership</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Gym Hours</h4>
+            <ul class="footer__links">
+              <li>Monday 5am - 10pm</li>
+              <li>Tuseday 5am - 10pm</li>
+              <li>Wednesday 5am - 10pm</li>
+              <li>Thursday 5am - 10pm</li>
+              <li>Friday 5am - 10pm</li>
+              <li>Saturday 5am - 10pm</li>
+              <li>Sunday 5am - 1pm</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bar">
+          Copyright © 2025. All rights reserved.
+        </div>
+      </section>
+
+    <script src="help_and_support.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff10;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        #payBtn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #payBtn:hover {
+            background-color: #e68900;
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images/logo-dark.png" alt="Gym Logo" class="logo">
+        <h1>Join Our Gym - ₹499/month</h1>
+        <button id="payBtn">Pay with Razorpay</button>
+    </div>
+
+    <script>
+        document.getElementById('payBtn').onclick = function () {
+            var options = {
+                "key": "rzp_test_DBvvjGOfEVmStc", // Replace with your Key ID
+                "amount": "49900", // Amount in paise (₹499)
+                "currency": "INR",
+                "name": "Gym Training",
+                "description": "Monthly Membership",
+                "image": "https://yourdomain.com/logo.png",
+                "handler": function (response) {
+//                    alert("Payment successful! Razorpay ID: " + response.razorpay_payment_id);
+                    window.location.href = "premium_send_otp.html";
+                    // Add AJAX call here to save payment if needed
+                },
+                "prefill": {
+                    "name": "Customer",
+                    "email": "fitnessprojectnnnp25@gmail.com",
+                    "contact": "9755339948"
+                },
+                "theme": {
+                    "color": "#ff9800"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        };
+    </script>
+</body>
+</html>

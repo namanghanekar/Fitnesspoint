@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Exercise Challenge</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #4338ca;
+            --cardio: #ef4444;
+            --strength: #f59e0b;
+            --flexibility: #10b981;
+            --balance: #3b82f6;
+            --recovery: #8b5cf6;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--gray-800);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        .progress-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: var(--gray-200);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            text-align: center;
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            min-width: 120px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .day-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .day-header {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .day-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .day-card:hover .day-header img {
+            transform: scale(1.05);
+        }
+
+        .day-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            color: white;
+        }
+
+        .day-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+
+        .day-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-content {
+            padding: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .day-card.expanded .day-content {
+            max-height: 500px;
+        }
+
+        .exercise-list {
+            list-style: none;
+        }
+
+        .exercise-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-check {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .exercise-check.checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .exercise-check.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .exercise-details {
+            flex: 1;
+        }
+
+        .exercise-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .exercise-description {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .day-footer {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .complete-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .complete-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .complete-btn.completed {
+            background-color: var(--gray-300);
+            cursor: default;
+        }
+
+        .difficulty {
+            display: flex;
+            gap: 3px;
+        }
+
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--gray-300);
+        }
+
+        .difficulty-dot.active {
+            background-color: var(--primary);
+        }
+
+        .day-card.cardio .day-header {
+            border-top: 4px solid var(--cardio);
+        }
+
+        .day-card.strength .day-header {
+            border-top: 4px solid var(--strength);
+        }
+
+        .day-card.flexibility .day-header {
+            border-top: 4px solid var(--flexibility);
+        }
+
+        .day-card.balance .day-header {
+            border-top: 4px solid var(--balance);
+        }
+
+        .day-card.recovery .day-header {
+            border-top: 4px solid var(--recovery);
+        }
+
+        .day-card.completed .day-header::after {
+            content: '✓';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .filter-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .filter-dot.cardio {
+            background-color: var(--cardio);
+        }
+
+        .filter-dot.strength {
+            background-color: var(--strength);
+        }
+
+        .filter-dot.flexibility {
+            background-color: var(--flexibility);
+        }
+
+        .filter-dot.balance {
+            background-color: var(--balance);
+        }
+
+        .filter-dot.recovery {
+            background-color: var(--recovery);
+        }
+
+        @media (max-width: 768px) {
+            .days-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .stats {
+                flex-wrap: wrap;
+            }
+
+            .stat {
+                flex: 1;
+                min-width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .day-header {
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>30-Day Exercise Challenge</h1>
+            <p class="subtitle">Transform your body and mind with our 30-day exercise program. Each day features 5 carefully selected exercises to help you build strength, improve flexibility, and boost your overall fitness.</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="daysCompleted">0</div>
+                    <div class="stat-label">Days Completed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="daysRemaining">30</div>
+                    <div class="stat-label">Days Remaining</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="completion">0%</div>
+                    <div class="stat-label">Completion</div>
+                </div>
+            </div>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All Exercises</button>
+                <button class="filter-btn" data-filter="cardio">
+                    <span class="filter-dot cardio"></span>
+                    Cardio
+                </button>
+                <button class="filter-btn" data-filter="strength">
+                    <span class="filter-dot strength"></span>
+                    Strength
+                </button>
+                <button class="filter-btn" data-filter="flexibility">
+                    <span class="filter-dot flexibility"></span>
+                    Flexibility
+                </button>
+                <button class="filter-btn" data-filter="balance">
+                    <span class="filter-dot balance"></span>
+                    Balance
+                </button>
+                <button class="filter-btn" data-filter="recovery">
+                    <span class="filter-dot recovery"></span>
+                    Recovery
+                </button>
+            </div>
+        </header>
+        
+        <div class="days-grid" id="daysGrid">
+            <!-- Days will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Exercise types with corresponding images
+            const exerciseTypes = [
+                {
+                    type: 'cardio',
+                    name: 'Cardio Blast',
+                    image: 'images/about.jpg?height=160&width=300&text=Cardio'
+                },
+                {
+                    type: 'strength',
+                    name: 'Strength Training',
+                    image: 'images/image3.jpg?height=160&width=300&text=Strength'
+                },
+                {
+                    type: 'flexibility',
+                    name: 'Flexibility & Mobility',
+                    image: 'images/image4.jpg?height=160&width=300&text=Flexibility'
+                },
+                {
+                    type: 'balance',
+                    name: 'Balance & Core',
+                    image: 'images/facility.jpg?height=160&width=300&text=Balance'
+                },
+                {
+                    type: 'recovery',
+                    name: 'Active Recovery',
+                    image: 'images/image3.jpg?height=160&width=300&text=Recovery'
+                }
+            ];
+            
+            // Exercise database
+            const exercises = {
+                cardio: [
+                    { name: 'Jumping Jacks', description: '3 sets x 30 seconds' },
+                    { name: 'High Knees', description: '3 sets x 30 seconds' },
+                    { name: 'Mountain Climbers', description: '3 sets x 20 reps' },
+                    { name: 'Burpees', description: '3 sets x 10 reps' },
+                    { name: 'Jump Rope', description: '3 sets x 1 minute' },
+                    { name: 'Squat Jumps', description: '3 sets x 15 reps' },
+                    { name: 'Jumping Lunges', description: '3 sets x 20 reps' },
+                    { name: 'Speed Skaters', description: '3 sets x 20 reps' }
+                ],
+                strength: [
+                    { name: 'Push-ups', description: '3 sets x 12 reps' },
+                    { name: 'Squats', description: '3 sets x 15 reps' },
+                    { name: 'Lunges', description: '3 sets x 10 reps each leg' },
+                    { name: 'Plank', description: '3 sets x 30 seconds' },
+                    { name: 'Dumbbell Rows', description: '3 sets x 12 reps' },
+                    { name: 'Glute Bridges', description: '3 sets x 15 reps' },
+                    { name: 'Tricep Dips', description: '3 sets x 12 reps' },
+                    { name: 'Bicycle Crunches', description: '3 sets x 20 reps' }
+                ],
+                flexibility: [
+                    { name: 'Forward Fold', description: 'Hold for 30 seconds' },
+                    { name: 'Downward Dog', description: 'Hold for 30 seconds' },
+                    { name: 'Cat-Cow Stretch', description: '10 slow repetitions' },
+                    { name: 'Butterfly Stretch', description: 'Hold for 30 seconds' },
+                    { name: 'Hip Flexor Stretch', description: '30 seconds each side' },
+                    { name: 'Shoulder Stretch', description: '30 seconds each arm' },
+                    { name: 'Child\'s Pose', description: 'Hold for 1 minute' },
+                    { name: 'Cobra Stretch', description: 'Hold for 30 seconds' }
+                ],
+                balance: [
+                    { name: 'Single Leg Stand', description: '30 seconds each leg' },
+                    { name: 'Tree Pose', description: '30 seconds each leg' },
+                    { name: 'Side Plank', description: '30 seconds each side' },
+                    { name: 'Bird Dog', description: '3 sets x 10 reps each side' },
+                    { name: 'Warrior III Pose', description: '30 seconds each leg' },
+                    { name: 'Standing Leg Raises', description: '3 sets x 10 reps each leg' },
+                    { name: 'Boat Pose', description: '3 sets x 30 seconds' },
+                    { name: 'Superman Hold', description: '3 sets x 30 seconds' }
+                ],
+                recovery: [
+                    { name: 'Foam Rolling', description: '1 minute per muscle group' },
+                    { name: 'Light Walking', description: '10-15 minutes' },
+                    { name: 'Gentle Yoga', description: '15-20 minutes' },
+                    { name: 'Deep Breathing', description: '5 minutes' },
+                    { name: 'Leg Elevations', description: '5 minutes' },
+                    { name: 'Arm Circles', description: '1 minute each direction' },
+                    { name: 'Neck Stretches', description: '30 seconds each direction' },
+                    { name: 'Ankle Rotations', description: '30 seconds each ankle' }
+                ]
+            };
+            
+            // Generate 30 days of exercises
+            const daysGrid = document.getElementById('daysGrid');
+            const completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
+            const completedExercises = JSON.parse(localStorage.getItem('completedExercises')) || {};
+            
+            // Generate a sequence of exercise types for 30 days
+            const dayTypes = [];
+            for (let i = 0; i < 30; i++) {
+                // Create a pattern: 2 cardio, 2 strength, 1 flexibility, 1 balance, 1 recovery
+                const cycle = Math.floor(i / 7);
+                const dayInCycle = i % 7;
+                
+                if (dayInCycle < 2) {
+                    dayTypes.push('cardio');
+                } else if (dayInCycle < 4) {
+                    dayTypes.push('strength');
+                } else if (dayInCycle < 5) {
+                    dayTypes.push('flexibility');
+                } else if (dayInCycle < 6) {
+                    dayTypes.push('balance');
+                } else {
+                    dayTypes.push('recovery');
+                }
+            }
+            
+            // Create day cards
+            for (let i = 0; i < 30; i++) {
+                const dayNumber = i + 1;
+                const dayType = dayTypes[i];
+                const typeInfo = exerciseTypes.find(type => type.type === dayType);
+                
+                // Get 5 random exercises for this day
+                const dayExercises = getRandomExercises(exercises[dayType], 5);
+                
+                // Create day card
+                const dayCard = document.createElement('div');
+                dayCard.className = `day-card ${dayType}`;
+                dayCard.dataset.day = dayNumber;
+                dayCard.dataset.type = dayType;
+                
+                if (completedDays.includes(dayNumber)) {
+                    dayCard.classList.add('completed');
+                }
+                
+                // Create day content
+                dayCard.innerHTML = `
+                    <div class="day-header">
+                        <img src="${typeInfo.image}" alt="${typeInfo.name}">
+                        <div class="day-overlay">
+                            <div class="day-number">${dayNumber}</div>
+                            <div>
+                                <div class="day-title">Day ${dayNumber}</div>
+                                <div class="day-type">${typeInfo.name}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <ul class="exercise-list">
+                            ${dayExercises.map((exercise, index) => `
+                                <li class="exercise-item" data-day="${dayNumber}" data-index="${index}">
+                                    <div class="exercise-check ${isExerciseCompleted(dayNumber, index) ? 'checked' : ''}"></div>
+                                    <div class="exercise-details">
+                                        <div class="exercise-name">${exercise.name}</div>
+                                        <div class="exercise-description">${exercise.description}</div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="day-footer">
+                        <div class="difficulty">
+                            ${getDifficultyDots(dayType)}
+                        </div>
+                        <button class="complete-btn ${completedDays.includes(dayNumber) ? 'completed' : ''}" data-day="${dayNumber}">
+                            ${completedDays.includes(dayNumber) ? 'Completed' : 'Mark Complete'}
+                        </button>
+                    </div>
+                `;
+                
+                daysGrid.appendChild(dayCard);
+            }
+            
+            // Add event listeners
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on a button or checkbox
+                    if (e.target.closest('.complete-btn') || e.target.closest('.exercise-check')) {
+                        return;
+                    }
+                    
+                    // Toggle expanded class
+                    this.classList.toggle('expanded');
+                });
+            });
+            
+            document.querySelectorAll('.complete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('completed')) {
+                        return;
+                    }
+                    
+                    const dayNumber = parseInt(this.dataset.day);
+                    const dayCard = document.querySelector(`.day-card[data-day="${dayNumber}"]`);
+                    
+                    // Mark day as completed
+                    if (!completedDays.includes(dayNumber)) {
+                        completedDays.push(dayNumber);
+                        localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                    }
+                    
+                    // Update UI
+                    dayCard.classList.add('completed');
+                    this.classList.add('completed');
+                    this.textContent = 'Completed';
+                    
+                    // Update stats
+                    updateStats();
+                });
+            });
+            
+            document.querySelectorAll('.exercise-check').forEach(check => {
+                check.addEventListener('click', function() {
+                    const dayNumber = parseInt(this.closest('.exercise-item').dataset.day);
+                    const exerciseIndex = parseInt(this.closest('.exercise-item').dataset.index);
+                    
+                    this.classList.toggle('checked');
+                    
+                    // Save to localStorage
+                    if (!completedExercises[dayNumber]) {
+                        completedExercises[dayNumber] = [];
+                    }
+                    
+                    if (this.classList.contains('checked')) {
+                        if (!completedExercises[dayNumber].includes(exerciseIndex)) {
+                            completedExercises[dayNumber].push(exerciseIndex);
+                        }
+                    } else {
+                        completedExercises[dayNumber] = completedExercises[dayNumber].filter(index => index !== exerciseIndex);
+                    }
+                    
+                    localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+                    
+                    // Check if all exercises are completed
+                    const allExercisesCompleted = document.querySelectorAll(`.exercise-item[data-day="${dayNumber}"]`).length === 
+                                                 document.querySelectorAll(`.exercise-item[data-day="${dayNumber}"] .exercise-check.checked`).length;
+                    
+                    // Auto-mark day as completed if all exercises are done
+                    if (allExercisesCompleted && !completedDays.includes(dayNumber)) {
+                        const completeBtn = document.querySelector(`.complete-btn[data-day="${dayNumber}"]`);
+                        completeBtn.click();
+                    }
+                });
+            });
+            
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active state
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    // Filter cards
+                    document.querySelectorAll('.day-card').forEach(card => {
+                        if (filter === 'all' || card.dataset.type === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Update stats initially
+            updateStats();
+            
+            // Helper functions
+            function getRandomExercises(exerciseList, count) {
+                const shuffled = [...exerciseList].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+            
+            function isExerciseCompleted(day, index) {
+                return completedExercises[day] && completedExercises[day].includes(index);
+            }
+            
+            function getDifficultyDots(type) {
+                let difficulty;
+                
+                switch (type) {
+                    case 'cardio':
+                        difficulty = 4;
+                        break;
+                    case 'strength':
+                        difficulty = 5;
+                        break;
+                    case 'flexibility':
+                        difficulty = 2;
+                        break;
+                    case 'balance':
+                        difficulty = 3;
+                        break;
+                    case 'recovery':
+                        difficulty = 1;
+                        break;
+                    default:
+                        difficulty = 3;
+                }
+                
+                let dots = '';
+                for (let i = 1; i <= 5; i++) {
+                    dots += `<div class="difficulty-dot ${i <= difficulty ? 'active' : ''}"></div>`;
+                }
+                
+                return dots;
+            }
+            
+            function updateStats() {
+                const completed = completedDays.length;
+                const remaining = 30 - completed;
+                const percentage = Math.round((completed / 30) * 100);
+                
+                document.getElementById('daysCompleted').textContent = completed;
+                document.getElementById('daysRemaining').textContent = remaining;
+                document.getElementById('completion').textContent = `${percentage}%`;
+                document.getElementById('progressBar').style.width = `${percentage}%`;
+            }
+        });
+    </script>
+</body>
+</html>

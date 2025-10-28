@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day 1 Workout</title>
+  <link rel="stylesheet" href="workout.css"/>
+</head>
+<body>
+    <header>
+        <h1 id="dayTitle">Welcome to Your Workout!</h1> <!-- Dynamic title will be updated here -->
+      </header>
+  
+  <div id="totalCalories">Total Calories Burned: 0 kcal</div>
+  <div class="exercise-grid" id="exerciseGrid"></div>
+<!-- modal -->
+  <div id="exerciseModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button" id="closeModal">&times;</span>
+      <div class="modal-left">
+        <iframe id="videoFrame" width="100%" height="240" src="" frameborder="0" allowfullscreen></iframe>
+        <h2 id="exerciseName"></h2>
+        <p><strong>Calories Burned:</strong> <span id="calories"></span> kcal</p>
+      </div>
+      <div class="modal-right">
+        <p><strong>Description:</strong> <span id="description"></span></p>
+        <p><strong>Common Mistakes:</strong> <span id="mistakes"></span></p>
+        <p><strong>Focus Area:</strong> <span id="focusArea"></span></p>
+        <img id="focusImage" src="" alt="Focus Area Image" />
+        <h4>Steps:</h4>
+        <ul id="steps"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="workout.js"></script>
+</body>
+</html>

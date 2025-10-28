@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Jumping Jacks",
+    "videoUrl": "https://www.youtube.com/embed/c4DAnQ6DtF8",
+    "calories": 50,
+    "description": "A full body warm-up exercise that improves cardio and coordination.",
+    "commonMistakes": "Landing too hard, not using full range of motion.",
+    "focusImage": "images/cardio.png",
+    "focusArea": "Cardio / Full Body",
+    "steps": [
+      "Stand upright with legs together, arms at sides.",
+      "Bend knees slightly and jump into the air.",
+      "As you jump, spread your legs to shoulder-width apart and raise your arms overhead.",
+      "Jump back to starting position and repeat."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bodyweight Squat",
+    "videoUrl": "https://www.youtube.com/embed/aclHkVaku9U",
+    "calories": 70,
+    "description": "A lower body strength movement targeting thighs and glutes.",
+    "commonMistakes": "Letting knees cave inward, lifting heels.",
+    "focusImage": "images/legs.png",
+    "focusArea": "Legs / Glutes",
+    "steps": [
+      "Stand with feet shoulder-width apart.",
+      "Lower hips back and down, keeping chest upright.",
+      "Go down until thighs are parallel to floor.",
+      "Push through heels to return to starting position."
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Push-Ups",
+    "videoUrl": "https://www.youtube.com/embed/IODxDxX7oi4",
+    "calories": 80,
+    "description": "Upper body strength move focusing on chest, arms, and core.",
+    "commonMistakes": "Sagging hips, flared elbows.",
+    "focusImage": "images/upperbody.png",
+    "focusArea": "Chest / Arms",
+    "steps": [
+      "Start in a high plank position.",
+      "Lower your body keeping elbows close to your body.",
+      "Push back up to starting position.",
+      "Keep core engaged throughout."
+    ]
+  }
+]
