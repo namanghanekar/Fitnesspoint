@@ -1,10 +1,3 @@
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,10 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author Dell
- */
 public class User_checklogin extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,22 +24,23 @@ public class User_checklogin extends HttpServlet {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LGYM", "root", "naman");
+            // ✅ Railway MySQL connection (replace password with your actual one)
+            String url = "jdbc:mysql://metro.proxy.rlwy.net:46756/railway?useSSL=false&allowPublicKeyRetrieval=true";
+            String user = "root";
+            String password = "xmNBUNWLgVuGVNqmfqgQnZverxKLlXyY"; // <— paste the real password from Railway
 
-            PreparedStatement ps = cn.prepareStatement("select * from user where email=? and binary password=? ");
+            Connection cn = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement ps = cn.prepareStatement("SELECT * FROM user WHERE email=? AND BINARY password=?");
             ps.setString(1, mail);
             ps.setString(2, pwd);
 
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 HttpSession hs = request.getSession(true);
                 hs.setAttribute("mail", mail);
 
-                //out.println("<h1>login successfully</h1>");
-
-                //RequestDispatcher rd=request.getRequestDispatcher("Customer_home");
-                //rd.forward(request, response
-                request.setAttribute("mail", mail);
                 out.println("<html>");
                 out.println("<head><title>Login Result</title></head>");
                 out.println("<body>");
@@ -60,11 +50,7 @@ public class User_checklogin extends HttpServlet {
                 out.println("</script>");
                 out.println("</body>");
                 out.println("</html>");
-//                response.sendRedirect("User_home");
-
             } else {
-//                out.println("<h2>Invalid Email or Password</h2>");
-
                 out.println("<html>");
                 out.println("<head><title>Login Result</title></head>");
                 out.println("<body>");
@@ -74,53 +60,29 @@ public class User_checklogin extends HttpServlet {
                 out.println("</script>");
                 out.println("</body>");
                 out.println("</html>");
-
-//                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-//                rd.include(request, response);
             }
 
+            cn.close();
+
         } catch (Exception e) {
-            out.println("value" + e.getMessage());
+            e.printStackTrace(out); // print error on web page for debugging
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Handles user login validation";
+    }
 }
