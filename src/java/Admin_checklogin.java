@@ -41,7 +41,7 @@ public class Admin_checklogin extends HttpServlet {
             }
 
             // ✅ Connect to DB
-            Connection cn = DriverManager.getConnection(url, user, password);
+            Connection cn = DriverManager.getConnection(url, admin, password);
 
             // ✅ Check admin credentials
             PreparedStatement ps = cn.prepareStatement(
