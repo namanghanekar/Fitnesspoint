@@ -18,22 +18,34 @@ public class Admin_checklogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        // 🧠 Railway MySQL credentials
+        String user = "root";
+        String password = "xmNBUNWLgVuGVNqmfqgQnZverxKLlXyY"; // your real Railway DB password
+        String url;
+
         try {
             String mail = request.getParameter("mail");
             String pwd = request.getParameter("pwd");
 
-            // ✅ Load MySQL driver
+            // ✅ Load MySQL Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // ✅ Railway database connection
-            String url = "jdbc:mysql://metro.proxy.rlwy.net:46756/railway?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=10000&socketTimeout=10000&serverTimezone=UTC";
-            String user = "root";
-            String password = "xmNBUNWLgVuGVNqmfqgQnZverxKLlXyY"; // paste your real password here
+            // ✅ Auto switch for local vs Railway environment
+            String env = System.getenv("RAILWAY_ENVIRONMENT");
+            if ("production".equals(env)) {
+                // Inside Railway → use private network
+                url = "jdbc:mysql://mysql.railway.internal:3306/railway?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=10000&socketTimeout=10000&serverTimezone=UTC";
+            } else {
+                // Local testing → use public proxy
+                url = "jdbc:mysql://metro.proxy.rlwy.net:46756/railway?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=10000&socketTimeout=10000&serverTimezone=UTC";
+            }
 
+            // ✅ Connect to DB
             Connection cn = DriverManager.getConnection(url, user, password);
 
             // ✅ Check admin credentials
-            PreparedStatement ps = cn.prepareStatement("SELECT * FROM admin WHERE email=? AND BINARY password=?");
+            PreparedStatement ps = cn.prepareStatement(
+                    "SELECT * FROM admin WHERE email=? AND BINARY password=?");
             ps.setString(1, mail);
             ps.setString(2, pwd);
 
@@ -43,7 +55,7 @@ public class Admin_checklogin extends HttpServlet {
                 HttpSession hs = request.getSession(true);
                 hs.setAttribute("mail", mail);
 
-                // ✅ Redirect after successful login
+                // ✅ Success alert and redirect
                 out.println("<html>");
                 out.println("<head><title>Login Success</title></head>");
                 out.println("<body>");
@@ -69,7 +81,10 @@ public class Admin_checklogin extends HttpServlet {
             cn.close();
 
         } catch (Exception e) {
-            e.printStackTrace(out); // print full error on the web page
+            // 🚨 Print full exception details on browser for debugging
+            out.println("<h3 style='color:red;'>Database Connection Error:</h3>");
+            out.println("<pre>" + e.getMessage() + "</pre>");
+            e.printStackTrace(out);
         }
     }
 
