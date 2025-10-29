@@ -28,9 +28,30 @@ public class User_registration extends HttpServlet {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LGYM", "root", "naman");
+            // ✅ Railway MySQL connection (replace password with your real one)
+            String url = "jdbc:mysql://metro.proxy.rlwy.net:46756/railway?useSSL=false&allowPublicKeyRetrieval=true";
+            String user = "root";
+            String password = "xmNBUNWLgVuGVNqmfqgQnZverxKLlXyY"; // ← paste your real password here
 
-            PreparedStatement ps = cn.prepareStatement("insert into user(name,email,number,birth_date,gender,height,weight,password) values(?,?,?,?,?,?,?,?)");
+            Connection cn = DriverManager.getConnection(url, user, password);
+
+            // ✅ Create user table if not exists (optional, for first-time setup)
+            cn.createStatement().executeUpdate(
+                "CREATE TABLE IF NOT EXISTS user (" +
+                "id INT AUTO_INCREMENT PRIMARY KEY," +
+                "name VARCHAR(100)," +
+                "email VARCHAR(100)," +
+                "number VARCHAR(20)," +
+                "birth_date VARCHAR(50)," +
+                "gender VARCHAR(10)," +
+                "height VARCHAR(10)," +
+                "weight VARCHAR(10)," +
+                "password VARCHAR(100))"
+            );
+
+            PreparedStatement ps = cn.prepareStatement(
+                "INSERT INTO user(name,email,number,birth_date,gender,height,weight,password) VALUES(?,?,?,?,?,?,?,?)"
+            );
 
             ps.setString(1, name);
             ps.setString(2, mail);
@@ -41,15 +62,19 @@ public class User_registration extends HttpServlet {
             ps.setString(7, weight);
             ps.setString(8, pwd);
 
-            boolean b = ps.execute();
-            if (b == false) {
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
                 out.println("<h2>You have successfully Registered</h2>");
                 RequestDispatcher rd = request.getRequestDispatcher("index.html");
                 rd.include(request, response);
+            } else {
+                out.println("<h3>Registration failed. Please try again.</h3>");
             }
+
             cn.close();
+
         } catch (Exception e) {
-            out.println(e.getMessage());
+            e.printStackTrace(out); // prints full error trace on screen
         }
     }
 
@@ -67,8 +92,6 @@ public class User_registration extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Handles user registration";
+    }
 }
-
